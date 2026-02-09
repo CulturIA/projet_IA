@@ -1,6 +1,7 @@
 # Environnement virtuel
 venv/
 .env
+data/
 
 # Fichiers système
 .DS_Store

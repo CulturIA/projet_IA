@@ -1,0 +1,97 @@
+2025-11-10 15:22:04,007 - error_handler - INFO - Mots-clés principaux : ['album', 'orelsan'], secondaires : []
+2025-11-10 15:22:04,024 - error_handler - CRITICAL - Erreur inattendue dans get_news_safe: No secrets found. Valid paths for a secrets.toml file or secret directories are: C:\Users\maxim\.streamlit\secrets.toml, C:\Users\maxim\Desktop\projet_IA-main\.streamlit\secrets.toml
+Traceback (most recent call last):
+  File "C:\Users\maxim\Desktop\projet_IA-main\error_handler.py", line 29, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\maxim\Desktop\projet_IA-main\error_handler.py", line 53, in get_news_safe
+    "apikey": config.GNEWS_API_KEY
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\maxim\Desktop\projet_IA-main\config.py", line 20, in GNEWS_API_KEY
+    if "GNEWS_API_KEY" in st.secrets:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\maxim\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\streamlit\runtime\secrets.py", line 527, in __contains__
+    return key in self._parse()
+                  ^^^^^^^^^^^^^
+  File "C:\Users\maxim\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\streamlit\runtime\secrets.py", line 376, in _parse
+    raise StreamlitSecretNotFoundError(error_msg)
+streamlit.errors.StreamlitSecretNotFoundError: No secrets found. Valid paths for a secrets.toml file or secret directories are: C:\Users\maxim\.streamlit\secrets.toml, C:\Users\maxim\Desktop\projet_IA-main\.streamlit\secrets.toml
+
+2025-11-10 15:22:14,137 - error_handler - INFO - Mots-clés principaux : ['tournée', 'damso'], secondaires : []
+2025-11-10 15:22:14,147 - error_handler - CRITICAL - Erreur inattendue dans get_news_safe: No secrets found. Valid paths for a secrets.toml file or secret directories are: C:\Users\maxim\.streamlit\secrets.toml, C:\Users\maxim\Desktop\projet_IA-main\.streamlit\secrets.toml
+Traceback (most recent call last):
+  File "C:\Users\maxim\Desktop\projet_IA-main\error_handler.py", line 29, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\maxim\Desktop\projet_IA-main\error_handler.py", line 53, in get_news_safe
+    "apikey": config.GNEWS_API_KEY
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\maxim\Desktop\projet_IA-main\config.py", line 20, in GNEWS_API_KEY
+    if "GNEWS_API_KEY" in st.secrets:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\maxim\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\streamlit\runtime\secrets.py", line 527, in __contains__
+    return key in self._parse()
+                  ^^^^^^^^^^^^^
+  File "C:\Users\maxim\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\streamlit\runtime\secrets.py", line 376, in _parse
+    raise StreamlitSecretNotFoundError(error_msg)
+streamlit.errors.StreamlitSecretNotFoundError: No secrets found. Valid paths for a secrets.toml file or secret directories are: C:\Users\maxim\.streamlit\secrets.toml, C:\Users\maxim\Desktop\projet_IA-main\.streamlit\secrets.toml
+
+2025-11-10 15:22:24,532 - error_handler - CRITICAL - Erreur inattendue dans get_news_safe: No secrets found. Valid paths for a secrets.toml file or secret directories are: C:\Users\maxim\.streamlit\secrets.toml, C:\Users\maxim\Desktop\projet_IA-main\.streamlit\secrets.toml
+Traceback (most recent call last):
+  File "C:\Users\maxim\Desktop\projet_IA-main\error_handler.py", line 29, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\maxim\Desktop\projet_IA-main\error_handler.py", line 53, in get_news_safe
+    "apikey": config.GNEWS_API_KEY
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\maxim\Desktop\projet_IA-main\config.py", line 20, in GNEWS_API_KEY
+    if "GNEWS_API_KEY" in st.secrets:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\maxim\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\streamlit\runtime\secrets.py", line 527, in __contains__
+    return key in self._parse()
+                  ^^^^^^^^^^^^^
+  File "C:\Users\maxim\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\streamlit\runtime\secrets.py", line 376, in _parse
+    raise StreamlitSecretNotFoundError(error_msg)
+streamlit.errors.StreamlitSecretNotFoundError: No secrets found. Valid paths for a secrets.toml file or secret directories are: C:\Users\maxim\.streamlit\secrets.toml, C:\Users\maxim\Desktop\projet_IA-main\.streamlit\secrets.toml
+
+2025-11-10 15:28:36,807 - error_handler - INFO - Mots-clés principaux : ['orelsan'], secondaires : []
+2025-11-10 15:29:18,444 - error_handler - INFO - Mots-clés principaux : ['tournée', 'damso'], secondaires : []
+2025-11-10 15:29:25,289 - error_handler - INFO - Mots-clés principaux : ['tournee', 'damso'], secondaires : []
+2025-11-10 15:29:36,280 - error_handler - INFO - Mots-clés principaux : ['damso'], secondaires : []
+2025-11-10 15:29:43,573 - error_handler - WARNING - Échec scraping (newspaper3k) https://www.lefigaro.fr/musique/je-l-aime-beaucoup-line-renaud-declare-sa-flamme-au-rappeur-damso-20250908: Article `download()` failed with 403 Client Error: Forbidden for url: https://www.lefigaro.fr/musique/je-l-aime-beaucoup-line-renaud-declare-sa-flamme-au-rappeur-damso-20250908 on URL https://www.lefigaro.fr/musique/je-l-aime-beaucoup-line-renaud-declare-sa-flamme-au-rappeur-damso-20250908
+2025-11-10 15:29:43,574 - error_handler - WARNING - Erreur scraping: Impossible de parser l'article.
+2025-11-10 15:29:44,911 - error_handler - WARNING - Échec scraping (newspaper3k) https://www.lefigaro.fr/musique/tu-me-rends-bete-gims-et-damso-devoilent-un-extrait-de-leur-morceau-avant-la-sortie-vendredi-20250812: Article `download()` failed with 403 Client Error: Forbidden for url: https://www.lefigaro.fr/musique/tu-me-rends-bete-gims-et-damso-devoilent-un-extrait-de-leur-morceau-avant-la-sortie-vendredi-20250812 on URL https://www.lefigaro.fr/musique/tu-me-rends-bete-gims-et-damso-devoilent-un-extrait-de-leur-morceau-avant-la-sortie-vendredi-20250812
+2025-11-10 15:29:44,911 - error_handler - WARNING - Erreur scraping: Impossible de parser l'article.
+2025-11-10 15:31:59,344 - error_handler - INFO - Mots-clés principaux : ['tournée', 'damso'], secondaires : []
+2025-11-10 15:32:02,910 - error_handler - INFO - Mots-clés principaux : ['damso'], secondaires : []
+2025-11-10 15:32:09,903 - error_handler - WARNING - Échec scraping (newspaper3k) https://www.lefigaro.fr/musique/je-l-aime-beaucoup-line-renaud-declare-sa-flamme-au-rappeur-damso-20250908: Article `download()` failed with 403 Client Error: Forbidden for url: https://www.lefigaro.fr/musique/je-l-aime-beaucoup-line-renaud-declare-sa-flamme-au-rappeur-damso-20250908 on URL https://www.lefigaro.fr/musique/je-l-aime-beaucoup-line-renaud-declare-sa-flamme-au-rappeur-damso-20250908
+2025-11-10 15:32:09,904 - error_handler - WARNING - Erreur scraping: Impossible de parser l'article.
+2025-11-10 15:32:10,929 - error_handler - WARNING - Échec scraping (newspaper3k) https://www.lefigaro.fr/musique/tu-me-rends-bete-gims-et-damso-devoilent-un-extrait-de-leur-morceau-avant-la-sortie-vendredi-20250812: Article `download()` failed with 403 Client Error: Forbidden for url: https://www.lefigaro.fr/musique/tu-me-rends-bete-gims-et-damso-devoilent-un-extrait-de-leur-morceau-avant-la-sortie-vendredi-20250812 on URL https://www.lefigaro.fr/musique/tu-me-rends-bete-gims-et-damso-devoilent-un-extrait-de-leur-morceau-avant-la-sortie-vendredi-20250812
+2025-11-10 15:32:10,929 - error_handler - WARNING - Erreur scraping: Impossible de parser l'article.
+2025-11-10 15:32:19,998 - error_handler - INFO - Mots-clés principaux : ['tournée', 'damso'], secondaires : []
+2025-11-10 15:32:35,583 - error_handler - INFO - Mots-clés principaux : ['tournée', 'orelsan'], secondaires : []
+2025-11-10 15:32:38,118 - error_handler - WARNING - Échec scraping (newspaper3k) https://www.lefigaro.fr/musique/embargo-lundi-matin-8-heures-orelsan-dix-ans-de-succes-et-un-grand-retour-20251027: Article `download()` failed with 403 Client Error: Forbidden for url: https://www.lefigaro.fr/musique/embargo-lundi-matin-8-heures-orelsan-dix-ans-de-succes-et-un-grand-retour-20251027 on URL https://www.lefigaro.fr/musique/embargo-lundi-matin-8-heures-orelsan-dix-ans-de-succes-et-un-grand-retour-20251027
+2025-11-10 15:32:38,118 - error_handler - WARNING - Erreur scraping: Impossible de parser l'article.
+2025-11-10 15:33:02,714 - error_handler - INFO - Mots-clés principaux : ['robert', 'tomczak'], secondaires : []
+2025-11-10 15:33:24,401 - error_handler - INFO - Mots-clés principaux : ['tomczak'], secondaires : []
+2025-11-10 15:33:40,039 - error_handler - INFO - Mots-clés principaux : ['damso'], secondaires : []
+2025-11-10 15:33:46,452 - error_handler - WARNING - Échec scraping (newspaper3k) https://www.lefigaro.fr/musique/je-l-aime-beaucoup-line-renaud-declare-sa-flamme-au-rappeur-damso-20250908: Article `download()` failed with 403 Client Error: Forbidden for url: https://www.lefigaro.fr/musique/je-l-aime-beaucoup-line-renaud-declare-sa-flamme-au-rappeur-damso-20250908 on URL https://www.lefigaro.fr/musique/je-l-aime-beaucoup-line-renaud-declare-sa-flamme-au-rappeur-damso-20250908
+2025-11-10 15:33:46,454 - error_handler - WARNING - Erreur scraping: Impossible de parser l'article.
+2025-11-10 15:33:47,563 - error_handler - WARNING - Échec scraping (newspaper3k) https://www.lefigaro.fr/musique/tu-me-rends-bete-gims-et-damso-devoilent-un-extrait-de-leur-morceau-avant-la-sortie-vendredi-20250812: Article `download()` failed with 403 Client Error: Forbidden for url: https://www.lefigaro.fr/musique/tu-me-rends-bete-gims-et-damso-devoilent-un-extrait-de-leur-morceau-avant-la-sortie-vendredi-20250812 on URL https://www.lefigaro.fr/musique/tu-me-rends-bete-gims-et-damso-devoilent-un-extrait-de-leur-morceau-avant-la-sortie-vendredi-20250812
+2025-11-10 15:33:47,563 - error_handler - WARNING - Erreur scraping: Impossible de parser l'article.
+2025-11-10 15:36:34,801 - error_handler - INFO - Mots-clés principaux : ['tournée', 'orelsan'], secondaires : []
+2025-11-10 15:36:36,133 - error_handler - WARNING - Échec scraping (newspaper3k) https://www.lefigaro.fr/musique/embargo-lundi-matin-8-heures-orelsan-dix-ans-de-succes-et-un-grand-retour-20251027: Article `download()` failed with 403 Client Error: Forbidden for url: https://www.lefigaro.fr/musique/embargo-lundi-matin-8-heures-orelsan-dix-ans-de-succes-et-un-grand-retour-20251027 on URL https://www.lefigaro.fr/musique/embargo-lundi-matin-8-heures-orelsan-dix-ans-de-succes-et-un-grand-retour-20251027
+2025-11-10 15:36:36,133 - error_handler - WARNING - Erreur scraping: Impossible de parser l'article.
+2025-11-10 15:36:53,227 - error_handler - INFO - Mots-clés principaux : ['napalm', 'death'], secondaires : []
+2025-11-10 15:37:26,677 - error_handler - INFO - Mots-clés principaux : ['orelsan'], secondaires : []
+2025-11-19 15:41:57,993 - error_handler - INFO - Mots-clés principaux : ['album', 'orelsan'], secondaires : []
+2025-11-19 15:42:13,870 - error_handler - WARNING - Échec scraping (newspaper3k) https://www.marianne.net/culture/musique/la-fuite-en-avant-son-cinquieme-album-toujours-pas-la-version-finale-d-orelsan: Article `download()` failed with 403 Client Error: Forbidden for url: https://www.marianne.net/culture/musique/la-fuite-en-avant-son-cinquieme-album-toujours-pas-la-version-finale-d-orelsan on URL https://www.marianne.net/culture/musique/la-fuite-en-avant-son-cinquieme-album-toujours-pas-la-version-finale-d-orelsan
+2025-11-19 15:42:13,871 - error_handler - WARNING - Erreur scraping: Impossible de parser l'article.
+2025-11-19 15:42:26,936 - error_handler - INFO - Mots-clés principaux : ['tournée', 'damso', '2026'], secondaires : []
+2025-11-19 15:42:45,792 - error_handler - INFO - Mots-clés principaux : ['tournée', 'damso'], secondaires : []
+2025-11-19 15:43:36,109 - error_handler - INFO - Mots-clés principaux : ['tournée', 'damso', '2026'], secondaires : []
+2025-11-19 15:43:48,918 - error_handler - INFO - Mots-clés principaux : ['festival', 'orelsan'], secondaires : []
+2025-11-19 15:43:59,980 - error_handler - WARNING - Échec scraping (newspaper3k) https://www.lavoixdunord.fr/1643320/article/2025-11-05/main-square-2026-comme-orelsan-le-groupe-de-rap-francais-l2b-se-produira-arras: Article `download()` failed with HTTPSConnectionPool(host='www.lavoixdunord.fr', port=443): Read timed out. (read timeout=7) on URL https://www.lavoixdunord.fr/1643320/article/2025-11-05/main-square-2026-comme-orelsan-le-groupe-de-rap-francais-l2b-se-produira-arras
+2025-11-19 15:43:59,981 - error_handler - WARNING - Erreur scraping: Impossible de parser l'article.
+2025-11-19 15:44:00,308 - error_handler - WARNING - Échec scraping (newspaper3k) https://www.lavoixdunord.fr/1643200/article/2025-11-05/la-premiere-tete-d-affiche-du-dour-festival-2026-est-devoilee-le-rappeur-orelsan: Article `download()` failed with HTTPSConnectionPool(host='www.lavoixdunord.fr', port=443): Read timed out. (read timeout=7) on URL https://www.lavoixdunord.fr/1643200/article/2025-11-05/la-premiere-tete-d-affiche-du-dour-festival-2026-est-devoilee-le-rappeur-orelsan
+2025-11-19 15:44:00,309 - error_handler - WARNING - Erreur scraping: Impossible de parser l'article.
