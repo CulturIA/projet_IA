@@ -1,44 +1,54 @@
 import os
 from pathlib import Path
 import streamlit as st
-from dotenv import load_dotenv
+
+# On tente d'importer dotenv, mais on ne plante pas si ça manque
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
 class Config:
-    """Configuration centralisée de l'application"""
+    """
+    Classe de configuration centralisée (Pattern Singleton).
+    Regroupe toutes les constantes et chemins du projet.
+    """
     
-    # Chemins
+    # --- CHEMINS ---
     BASE_DIR = Path(__file__).parent
     DATA_DIR = BASE_DIR / "data"
     RATINGS_FILE = DATA_DIR / "ratings.json"
+    STATS_FILE = DATA_DIR / "stats.json"
+    VIEWED_ARTICLES_FILE = DATA_DIR / "viewed_articles.json"
+    FAVORITES_FILE = DATA_DIR / "favorites.json"
     
-    # API Configuration
+    # --- PARAMÈTRES API ---
     @property
     def GNEWS_API_KEY(self):
-        load_dotenv()
+        """Récupère la clé API avec ordre de priorité : .env > st.secrets > Hardcodé."""
+        # 1. Variable d'environnement (.env)
         api_key = os.getenv("GNEWS_API_KEY")
-        if not api_key and "GNEWS_API_KEY" in st.secrets:
-            api_key = st.secrets["GNEWS_API_KEY"]
+        if api_key: return api_key
         
-        # Clé de secours (Change-la si elle ne marche plus !)
-        if not api_key or api_key == "VOTRE_CLE_API_GNEWS_ICI":
-            return "bcebac0ef1ab86a99f96b6f1238b98b6" 
-        return api_key
-    
-    # Paramètres API & Scraping
-    MAX_ARTICLES_TO_SCRAPE = 20
-    CACHE_DURATION = 600
-    DEFAULT_NUM_ARTICLES = 5
-    MAX_NUM_ARTICLES = 20
-    
-    # --- LA LIGNE QUI MANQUAIT ---
-    API_TIMEOUT = 10  # Temps max en secondes pour attendre une réponse
-    # -----------------------------
-    
-    # Mots à ignorer (STOP_WORDS)
-    STOP_WORDS = set([
-        "le", "l", "la", "les", "un", "une", "des", "de", "du", "au", "aux", "et", "ou", "est", "sont", "a", "ont", "qui", "que", "quoi", "dont", "où", "je", "tu", "il", "elle", "nous", "vous", "ils", "elles", "quel", "quelle", "quelles", "quels", "mon", "ton", "son", "notre", "votre", "leur", "dans", "sur", "avec", "pour", "par", "sans", "comment", "pourquoi", "quand",
-        "exemple", "est-ce", "ce", "ça", "fait", "faire", "une", "nouvelle", "nouveau", "en", "si", "plus", "moins", "très", "trop", "beaucoup", "vraiment", "va", "vas", "veut", "veux", "veulent", "sais", "sait", "savent", "connais", "connait", "connaissent", "y", "t", "s", "d"
-    ])
+        # 2. Streamlit Cloud Secrets
+        if "GNEWS_API_KEY" in st.secrets:
+            return st.secrets["GNEWS_API_KEY"]
+            
+        # 3. Fallback (Clé de secours)
+        return "bcebac0ef1ab86a99f96b6f1238b98b6"
 
-# Instanciation pour export
+    MAX_ARTICLES_TO_SCRAPE = 20
+    CACHE_DURATION = 3600  # 1 heure
+    API_TIMEOUT = 10      # Secondes avant abandon
+
+    # --- NLP (Traitement Langage) ---
+    STOP_WORDS = {
+        "le", "la", "les", "un", "une", "des", "de", "du", "au", "aux", "et", "ou", 
+        "est", "sont", "a", "ont", "qui", "que", "quoi", "dont", "où", "je", "tu", 
+        "il", "elle", "nous", "vous", "ils", "elles", "dans", "sur", "avec", "pour", 
+        "par", "sans", "comment", "pourquoi", "quand", "ce", "cette", "cet", "ces",
+        "en", "si", "plus", "moins", "très", "trop", "mais", "donc", "or", "ni", "car"
+    }
+
 config = Config()
