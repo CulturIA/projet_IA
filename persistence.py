@@ -3,7 +3,7 @@ import os
 from config import config
 
 def load_ratings():
-    # ... (Code existant inchangé) ...
+    
     if os.path.exists(config.RATINGS_FILE):
         try:
             with open(config.RATINGS_FILE, 'r', encoding='utf-8') as f:
