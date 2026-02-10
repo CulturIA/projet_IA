@@ -95,3 +95,23 @@ streamlit.errors.StreamlitSecretNotFoundError: No secrets found. Valid paths for
 2025-11-19 15:43:59,981 - error_handler - WARNING - Erreur scraping: Impossible de parser l'article.
 2025-11-19 15:44:00,308 - error_handler - WARNING - Échec scraping (newspaper3k) https://www.lavoixdunord.fr/1643200/article/2025-11-05/la-premiere-tete-d-affiche-du-dour-festival-2026-est-devoilee-le-rappeur-orelsan: Article `download()` failed with HTTPSConnectionPool(host='www.lavoixdunord.fr', port=443): Read timed out. (read timeout=7) on URL https://www.lavoixdunord.fr/1643200/article/2025-11-05/la-premiere-tete-d-affiche-du-dour-festival-2026-est-devoilee-le-rappeur-orelsan
 2025-11-19 15:44:00,309 - error_handler - WARNING - Erreur scraping: Impossible de parser l'article.
+2026-02-09 13:49:25,685 - error_handler - CRITICAL - Erreur inattendue dans get_news_safe: 'Config' object has no attribute 'MAX_ARTICLES_PER_REQUEST'
+Traceback (most recent call last):
+  File "C:\Users\maxim\Desktop\projet_IA-main\error_handler.py", line 29, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\maxim\Desktop\projet_IA-main\error_handler.py", line 52, in get_news_safe
+    "max": min(max_articles, config.MAX_ARTICLES_PER_REQUEST),
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Config' object has no attribute 'MAX_ARTICLES_PER_REQUEST'
+
+2026-02-09 13:49:32,991 - error_handler - CRITICAL - Erreur inattendue dans get_news_safe: 'Config' object has no attribute 'MAX_ARTICLES_PER_REQUEST'
+Traceback (most recent call last):
+  File "C:\Users\maxim\Desktop\projet_IA-main\error_handler.py", line 29, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\maxim\Desktop\projet_IA-main\error_handler.py", line 52, in get_news_safe
+    "max": min(max_articles, config.MAX_ARTICLES_PER_REQUEST),
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Config' object has no attribute 'MAX_ARTICLES_PER_REQUEST'
+

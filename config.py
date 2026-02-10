@@ -14,35 +14,31 @@ class Config:
     # API Configuration
     @property
     def GNEWS_API_KEY(self):
-        """Récupère la clé API depuis les variables d'environnement ou secrets Streamlit"""
-        load_dotenv() # Charge le fichier .env
-        
-        # Essaye d'abord de lire le .env local, ce qui fonctionnera toujours sur votre machine
+        load_dotenv()
         api_key = os.getenv("GNEWS_API_KEY")
-        
-        # Si la clé n'est pas dans .env, alors on vérifie les secrets Streamlit (pour le déploiement)
         if not api_key and "GNEWS_API_KEY" in st.secrets:
             api_key = st.secrets["GNEWS_API_KEY"]
-
+        
+        # Clé de secours (Change-la si elle ne marche plus !)
         if not api_key or api_key == "VOTRE_CLE_API_GNEWS_ICI":
-            st.error("⚠️ Clé API GNews manquante ou non configurée ! Ajoutez GNEWS_API_KEY dans un fichier .env ou dans les secrets Streamlit.")
-            st.stop()
+            return "bcebac0ef1ab86a99f96b6f1238b98b6" 
         return api_key
     
-    # Limites API
-    MAX_ARTICLES_PER_REQUEST = 100
+    # Paramètres API & Scraping
     MAX_ARTICLES_TO_SCRAPE = 20
-    API_TIMEOUT = 10  # secondes
-    
-    # Cache
-    CACHE_DURATION = 600  # 10 minutes en secondes
-    
-    # Interface
+    CACHE_DURATION = 600
     DEFAULT_NUM_ARTICLES = 5
     MAX_NUM_ARTICLES = 20
     
-    # Scraping
-    SCRAPING_TIMEOUT = 10
+    # --- LA LIGNE QUI MANQUAIT ---
+    API_TIMEOUT = 10  # Temps max en secondes pour attendre une réponse
+    # -----------------------------
+    
+    # Mots à ignorer (STOP_WORDS)
+    STOP_WORDS = set([
+        "le", "l", "la", "les", "un", "une", "des", "de", "du", "au", "aux", "et", "ou", "est", "sont", "a", "ont", "qui", "que", "quoi", "dont", "où", "je", "tu", "il", "elle", "nous", "vous", "ils", "elles", "quel", "quelle", "quelles", "quels", "mon", "ton", "son", "notre", "votre", "leur", "dans", "sur", "avec", "pour", "par", "sans", "comment", "pourquoi", "quand",
+        "exemple", "est-ce", "ce", "ça", "fait", "faire", "une", "nouvelle", "nouveau", "en", "si", "plus", "moins", "très", "trop", "beaucoup", "vraiment", "va", "vas", "veut", "veux", "veulent", "sais", "sait", "savent", "connais", "connait", "connaissent", "y", "t", "s", "d"
+    ])
 
-# Instanciation
+# Instanciation pour export
 config = Config()

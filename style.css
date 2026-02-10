@@ -1,0 +1,151 @@
+/* =====================
+   1. FONTS & RESET
+   ===================== */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap');
+
+/* Suppression Interface Streamlit */
+header[data-testid="stHeader"], div[data-testid="stDecoration"] { display: none; }
+.block-container { padding-top: 1rem !important; padding-bottom: 5rem !important; max-width: 1200px; }
+
+/* FORCE LE FOND D'ECRAN */
+.stApp {
+    background-color: var(--bg-app) !important;
+    color: var(--text-main) !important;
+    margin-top: 0;
+}
+
+/* =====================
+   2. NAVIGATION (Bandeau Haut)
+   ===================== */
+.nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 4px solid var(--text-main);
+    margin-bottom: 40px;
+    background-color: var(--bg-app);
+    transition: background-color 0.3s ease;
+}
+
+/* --- BOUTONS NAVIGATION --- */
+div.stButton > button {
+    background-color: transparent !important;
+    color: var(--text-main) !important;
+    border: none !important;
+    border-radius: 4px !important;
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem !important;
+    padding: 0px 5px !important;
+    transition: all 0.2s ease;
+    height: auto !important;
+    min-height: 40px !important;
+    line-height: 1 !important;
+    box-shadow: none !important;
+}
+
+div.stButton > button:hover {
+    background-color: rgba(125,125,125,0.1) !important;
+    color: var(--accent) !important;
+}
+
+/* Compteur au milieu */
+.counter-box {
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding: 10px 0;
+    color: var(--text-main);
+    font-family: 'Playfair Display', serif;
+}
+
+/* AJUSTEMENT SPÉCIFIQUE POUR LES SYMBOLES + ET - */
+/* On cible les boutons qui contiennent ces symboles via Python (pas possible via CSS pur facilement sans classe) 
+   mais on s'assure que la police est assez grosse */
+   
+/* =====================
+   3. BOUTONS CATÉGORIES
+   ===================== */
+div.stButton > button:disabled {
+    background-color: var(--text-main) !important;
+    color: var(--bg-app) !important;
+    opacity: 1 !important;
+    cursor: default;
+}
+
+/* =====================
+   4. BRANDING
+   ===================== */
+.brand-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 6rem;
+    font-weight: 900;
+    color: var(--text-main);
+    text-align: center;
+    line-height: 0.9;
+    letter-spacing: -3px;
+    margin: 20px 0 10px 0;
+}
+.tagline-container {
+    display: flex; align-items: center; justify-content: center; margin-bottom: 50px;
+}
+.tagline {
+    font-family: 'Lora', serif; font-style: italic; font-size: 1.1rem;
+    color: var(--text-light); padding: 0 20px; background: var(--bg-app);
+    position: relative; z-index: 1;
+}
+.tagline-line {
+    position: absolute; left: 0; right: 0; height: 1px;
+    background: var(--border); z-index: 0; width: 60%; margin: 0 auto;
+}
+
+/* =====================
+   5. CARTES ARTICLES
+   ===================== */
+.hero-container { margin-bottom: 60px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+.hero-image-box { width: 100%; aspect-ratio: 21/9; overflow: hidden; margin-bottom: 20px; }
+.hero-image-box img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.95); }
+
+.hero-meta { font-family: 'Lora', serif; font-weight: 700; color: var(--accent); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
+.hero-title { font-family: 'Playfair Display', serif; font-size: 3.5rem; line-height: 1.1; font-weight: 800; color: var(--text-main); margin: 10px 0 15px 0; }
+.hero-desc { font-family: 'Lora', serif; font-size: 1.1rem; line-height: 1.6; color: var(--text-light); border-left: 4px solid var(--accent); padding-left: 20px; }
+
+.grid-card { border-top: 4px solid var(--text-main); padding-top: 15px; height: 100%; display: flex; flex-direction: column; }
+.grid-image-box { width: 100%; aspect-ratio: 3/2; margin-bottom: 15px; overflow: hidden; background: #333; }
+.grid-image-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.grid-card:hover img { transform: scale(1.05); }
+
+.grid-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--text-main); margin-bottom: 10px; line-height: 1.2; }
+.grid-desc { font-family: 'Lora', serif; font-size: 0.95rem; color: var(--text-light); margin-bottom: 15px; }
+
+.content-box { background: var(--bg-app); padding: 10px; border: 1px solid var(--border); font-size: 0.9rem; margin-top: 10px; color: var(--text-main); }
+.card-footer { margin-top: auto; font-size: 0.75rem; color: var(--text-light); display: flex; justify-content: space-between; padding-top: 10px; border-top: 1px dotted var(--border); }
+details { margin-top: 10px; }
+summary { font-family: 'Lora', serif; font-weight: bold; cursor: pointer; color: var(--text-main); }
+
+/* =====================
+   6. MESSAGES D'ALERTE (st.warning, st.info...)
+   ===================== */
+
+div[data-testid="stAlert"] {
+    background-color: transparent !important;
+    color: var(--text-main) !important;
+    border-radius: 0 !important;
+    padding: 15px !important;
+}
+
+div[data-testid="stAlert"] p, 
+div[data-testid="stAlert"] div, 
+div[data-testid="stAlert"] span {
+    color: var(--text-main) !important;
+    font-family: 'Lora', serif !important;
+    font-size: 1rem !important;
+}
+
+div[data-testid="stAlert"] svg {
+    fill: var(--text-main) !important;
+    color: var(--text-main) !important;
+}

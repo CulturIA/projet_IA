@@ -1,47 +1,72 @@
-# Notre Assistant IA
+# 🏛️ Culturia
+### *L'Assistant Culturel Intelligent & Immersif*
 
-Assistant Intelligent développé avec **Streamlit**
+![Python](https://img.shields.io/badge/Python-3.9%2B-blue?style=for-the-badge&logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![Status](https://img.shields.io/badge/Status-En_Développement-green?style=for-the-badge)
 
-Projet de fin d’année : IA sous forme de site web intelligent proposant des articles personnalisés sur le sport, la musique, les jeux vidéos et l'actualité générale.
+> **Culturia** réinvente la veille culturelle. Fini le scroll infini : accédez à une agrégation intelligente d'articles sur le **Sport**, la **Musique**, les **Jeux Vidéo** et l'**Actualité**, présentée dans une interface simple d'utilisation et accessible a tous.
 
-## Fonctionnalités
+---
 
-- **Interface Multi-Pages :** Navigation claire entre un mode "Recherche" et un mode "Parcourir les articles".
-- **Recherche Intelligente et Pertinente :**
-  - **Analyse sémantique :** L'IA distingue les mots-clés principaux des mots de contexte pour affiner la recherche.
-  - **Extraction de contenu (avec `Newspaper3k`) :** L'assistant ne se contente pas des titres ou descriptions. Il scrape le contenu complet des articles pour une analyse en profondeur.
-  - **Algorithme de score avancé :** La pertinence est calculée en fonction de la présence obligatoire des mots-clés principaux, de leur fréquence, et d'un bonus s'ils apparaissent dans le titre.
-- **Options de Tri Avancées :**
-  - Triez les résultats de recherche par pertinence ou par date de publication.
-  - Triez les articles en mode "Parcourir" par date ou par note.
-- **Système de Notation Persistant :**
-  - Notez les articles de 1 à 5 étoiles.
-  - Vos notes sont sauvegardées localement dans un fichier `ratings.json` et sont conservées entre les sessions.
-- **Affichage Dynamique et Intuitif :**
-  - **Présentation claire :** Le meilleur résultat est mis en avant, tandis que les autres articles similaires sont groupés dans des sections dépliables.
-  - **Contenu intégré :** Lisez un résumé ou l'intégralité du contenu de l'article directement dans l'application, avec un lien vers la source originale.
-  - **Visuels attractifs :** Les images des articles sont directement affichées pour une meilleure expérience visuelle.
-- **Contrôle de l'Affichage :** Choisissez le nombre d'articles à afficher via un sélecteur dans la barre latérale.
-- **Contenu en Temps Réel (avec `GNews API`) :** Les articles sont récupérés en direct pour garantir des informations toujours à jour.
-- **Performances Optimisées :** Le scraping du contenu de plusieurs articles est effectué en parallèle pour réduire le temps de chargement.
+## 📸 Aperçu
 
-## Équipe
+| Page d'Accueil | Lecture d'Article |
+|:---:|:---:|
+| *Interface de recherche épurée* | *Mode lecture immersive* |
+| <img width="1902" height="625" alt="image" src="https://github.com/user-attachments/assets/673db9ad-bb5e-4455-b3e3-9518d55d70a1" />|<img width="890" height="947" alt="image" src="https://github.com/user-attachments/assets/70f0ca82-a4ab-4559-85fb-b977d6cb9a29" />
 
-- Noam Boutounas
-- Maxime Navellier
 
-## Installation
+---
 
-1.  Assurez-vous d'avoir Python installé sur votre machine.
-2.  Clonez ou téléchargez ce projet.
-3.  Ouvrez un terminal dans le dossier du projet et installez les dépendances :
+## ✨ Fonctionnalités Clés
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+### 🎨 1. Expérience Utilisateur "Néo-Journal"
+Nous avons cassé les codes de Streamlit pour offrir une **expérience visuelle unique** :
+* **Design Sur-Mesure :** Injection de CSS avancé pour une interface élégante (Police *Playfair Display* & *Merriweather*).
+* **Hero Cards & Grilles :** Une mise en page hiérarchisée avec un article "à la une" et une grille secondaire structurée.
+* **Harmonie Visuelle :** Toutes les images sont automatiquement redimensionnées et recadrées au format **16/9** pour un rendu impeccable.
+* **Barre de Contrôle Unifiée :** Navigation fluide entre la *Recherche*, le mode *Parcourir*, l'*Historique* et les *Paramètres*.
 
-4.  Lancez l'application Streamlit :
+### 🧠 2. Moteur de Recherche Intelligent
+* **Analyse Sémantique :** L'algorithme distingue le **sujet principal** des termes contextuels pour affiner les résultats.
+* **Correction Orthographique  :** Module de détection automatique des fautes de frappe (ex: *"Mbape"* → *"Mbappe"*).
+* **Scoring de Pertinence :** Calcul dynamique du score de chaque article basé sur la fréquence et la position des mots-clés (si le mot est présent dans le titre, la description...).
+* **Transparence :** Chaque résultat affiche une section **"Mots en commun"** détaillant les correspondances trouvées.
 
-    ```bash
-    streamlit run app.py
-    ```
+### 📖 3. Lecture Optimisée
+* **Contenu Intégré :** Plus besoin de quitter l'application. Lisez l'intégralité de l'article via le bouton dépliant **"Lire la suite"**.
+* **Historique de Session 🕒 :** Retrouvez instantanément vos 10 dernières lectures via un menu déroulant dédié.
+* **Filtrage Thématique :** Explorez les articles par catégories (*Sport, Tech, Musique...*) en un clic.
+
+---
+
+## 🛠️ Stack Technique
+
+* **Framework :** `Streamlit` (Frontend & Backend léger)
+* **Data & API :** `GNews` (Flux temps réel), `Newspaper3k` (Scraping de contenu)
+* **Traitement :** `Python` (Multi-threading, Regex, Logique de scoring)
+* **Persistance :** `JSON` (Sauvegarde locale des notes et préférences >*EN DEVELOPPEMENT*)
+
+---
+
+## 🚀 Installation & Démarrage
+
+Suivez ces étapes pour lancer **Culturia** sur votre machine locale :
+1. Telecharger tout les fichiers présent sur le Github.
+   
+2. Installer les dépendances
+
+```Bash
+pip install -r requirements.txt
+```
+3. Lancer l'application
+```Bash
+
+streamlit run app.py
+```
+👥 Equipe développement
+Projet réalisé dans le cadre d'un projet de fin d'année en 3e année de licence informatique a l'INSA HDF par :
+
+Noam Boutounas
+Maxime Navellier
