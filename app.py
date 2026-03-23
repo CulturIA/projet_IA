@@ -34,11 +34,11 @@ def inject_theme():
     """Injecte les variables CSS dynamiques selon le thème choisi."""
     if st.session_state.theme == 'dark':
         css = """
-        :root { --bg-app: #0e0e0e; --text-main: #ffffff; --text-light: #b0b0b0; --accent: #60A5FA; --border: #444444; }
+        :root { --bg-app: #363636; --text-main: #ffffff; --text-light: #b0b0b0; --accent: #60A5FA; --border: #444444; }
         """
     else:
         css = """
-        :root { --bg-app: #ffffff; --text-main: #000000; --text-light: #444444; --accent: #2563EB; --border: #cccccc; }
+        :root { --bg-app: #ffffff; --text-main: #000000; --text-light: #000000; --accent: #2563EB; --border: #cccccc; }
         """
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
@@ -83,6 +83,8 @@ def perform_search(query, num_articles):
                     articles_formatted.append({
                         "titre": art.get("title", "Sans titre"),
                         "description": art.get("description", ""),
+                        "titre": art.get("title") or "Sans titre",
+                        "description": art.get("description") or "",
                         "date": date_str,
                         "url": art.get("url", "#"),
                         "image": art.get("image"),
@@ -164,6 +166,7 @@ def afficher_article_interactif(article, is_hero=False, index=0):
         <div style="background:var(--bg-app); border:1px solid var(--accent); padding:20px; margin-bottom:20px;">
             <h3 style="margin-top:0;">Contenu complet</h3>
             <p style="line-height:1.6; font-family:'Lora',serif;">{article.get('contenu_complet', 'Contenu non disponible')}</p>
+            <p style="line-height:1.6; font-family:'Lora',serif;">{article.get('contenu_complet') or 'Contenu non disponible'}</p>
             <a href="{article['url']}" target="_blank" style="display:block; margin-top:10px; color:var(--accent); font-weight:bold;">🔗 Lire sur le site d'origine</a>
         </div>
         """, unsafe_allow_html=True)
@@ -205,7 +208,7 @@ with st.container():
 # --- 8. CORPS DE PAGE ---
 st.markdown(f"""
     <div class="brand-title" translate="no" class="notranslate">Culturia</div>
-    <div style="text-align: center; font-family: 'Lora', serif; color: var(--text-light); font-style: italic; margin-top: -15px; margin-bottom: 30px;">Made by Noam & Maxime</div>
+    <div style="text-align: center; padding-top: 20px; font-family: 'Lora', serif; color: var(--text-light); font-style: italic; margin-top: -15px; margin-bottom: 30px;">Created by Noam Boutounas & Maxime Navellier</div>
     <div class="tagline-container"><div class="tagline-line"></div><div class="tagline">{datetime.now().strftime('%A %d %B %Y').capitalize()} — L'information augmentée</div></div>
 """, unsafe_allow_html=True)
 
