@@ -205,6 +205,7 @@ with st.container():
 # --- 8. CORPS DE PAGE ---
 st.markdown(f"""
     <div class="brand-title" translate="no" class="notranslate">Culturia</div>
+    <div style="text-align: center; font-family: 'Lora', serif; color: var(--text-light); font-style: italic; margin-top: -15px; margin-bottom: 30px;">Made by Noam & Maxime</div>
     <div class="tagline-container"><div class="tagline-line"></div><div class="tagline">{datetime.now().strftime('%A %d %B %Y').capitalize()} — L'information augmentée</div></div>
 """, unsafe_allow_html=True)
 
