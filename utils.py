@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 # Synonymes pour l'expansion de requête
 QUERY_EXPANSION = {
-    "psg": ["paris saint-germain", "mbappé", "ligue 1", "football"],
+    "psg": ["paris saint-germain", "ligue 1", "football"],
     "om": ["olympique de marseille", "ligue 1", "football"],
     "ia": ["intelligence artificielle", "chatgpt", "openai", "tech"],
     "macron": ["emmanuel macron", "président", "elysée", "politique"],
