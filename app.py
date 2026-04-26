@@ -1,6 +1,5 @@
 import streamlit as st
 from datetime import datetime
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # --- Imports des modules (MVC Pattern) ---
 from config import config
@@ -18,6 +17,7 @@ from utils import (
 st.set_page_config(page_title="Culturia", page_icon="📰", layout="wide")
 
 # --- 2. GESTION DE L'ÉTAT (SESSION STATE) ---
+# Initialisation des variables globales de l'interface
 if 'theme' not in st.session_state: st.session_state.theme = 'light'
 if 'page' not in st.session_state: st.session_state.page = "Recherche"
 if 'num_articles' not in st.session_state: st.session_state.num_articles = 10
@@ -27,20 +27,23 @@ if 'opened_article_url' not in st.session_state: st.session_state.opened_article
 
 # --- 3. FONCTIONS UI (THEME & CSS) ---
 def toggle_theme():
+    """Basculer entre Mode Clair et Sombre."""
     st.session_state.theme = 'dark' if st.session_state.theme == 'light' else 'light'
 
 def inject_theme():
+    """Injecte les variables CSS dynamiques selon le thème choisi."""
     if st.session_state.theme == 'dark':
         css = """
-        :root { --bg-app: #0e0e0e; --text-main: #ffffff; --text-light: #b0b0b0; --accent: #60A5FA; --border: #444444; }
+        :root { --bg-app: #363636; --text-main: #ffffff; --text-light: #b0b0b0; --accent: #60A5FA; --border: #444444; }
         """
     else:
         css = """
-        :root { --bg-app: #ffffff; --text-main: #000000; --text-light: #444444; --accent: #2563EB; --border: #cccccc; }
+        :root { --bg-app: #ffffff; --text-main: #000000; --text-light: #000000; --accent: #2563EB; --border: #cccccc; }
         """
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
 def local_css(file_name):
+    """Charge le fichier CSS externe."""
     try:
         with open(file_name, "r", encoding="utf-8") as f: st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
     except FileNotFoundError: pass
@@ -57,11 +60,21 @@ if 'favorites' not in st.session_state:
 
 # --- 5. LOGIQUE CONTROLEUR ---
 def perform_search(query, num_articles):
+    """
+    Orchestre la recherche : 
+    1. Nettoyage requête
+    2. Appel API GNews (via cache)
+    3. Scraping parallèle du contenu
+    4. Calcul de pertinence
+    5. Mise en cache des résultats
+    """
     kw = get_search_query(query)
+    # Récupération API (rapide)
     articles_raw = get_news_safe(kw, num_articles)
     
     if articles_raw:
         with st.spinner(f"Analyse approfondie de {len(articles_raw)} articles sur '{query}'..."):
+            # Formatage initial
             articles_formatted = []
             for art in articles_raw:
                 try:
@@ -70,6 +83,8 @@ def perform_search(query, num_articles):
                     articles_formatted.append({
                         "titre": art.get("title", "Sans titre"),
                         "description": art.get("description", ""),
+                        "titre": art.get("title") or "Sans titre",
+                        "description": art.get("description") or "",
                         "date": date_str,
                         "url": art.get("url", "#"),
                         "image": art.get("image"),
@@ -78,8 +93,11 @@ def perform_search(query, num_articles):
                     })
                 except Exception: continue
 
+            # Scraping (lent, donc parallèle)
             articles_full = scrape_articles_parallel(articles_formatted)
+            # Tri par pertinence
             articles_full.sort(key=lambda x: calculate_score(x, kw), reverse=True)
+            
             st.session_state.cached_results = articles_full
     else:
         st.session_state.cached_results = []
@@ -87,10 +105,12 @@ def perform_search(query, num_articles):
     st.session_state.current_query = query
 
 def is_favorite(article):
+    """Vérifie si l'article est déjà en favori."""
     return any(f['url'] == article['url'] for f in st.session_state.favorites)
 
 # --- 6. COMPOSANTS D'AFFICHAGE ---
 def generer_html_card_content(art, is_hero=False):
+    """Génère le HTML pour une carte (Hero ou Grid)."""
     sentiment = analyze_sentiment(art.get('description', ''))
     img_html = f'<div class="{ "hero" if is_hero else "grid" }-image-box"><img src="{art["image"]}"></div>' if art.get('image') else ""
     
@@ -118,14 +138,17 @@ def generer_html_card_content(art, is_hero=False):
         """
 
 def afficher_article_interactif(article, is_hero=False, index=0):
+    """Affiche une carte complète avec ses boutons interactifs."""
     st.markdown(generer_html_card_content(article, is_hero), unsafe_allow_html=True)
     c1, c2 = st.columns([1, 4])
     
+    # Bouton Favoris
     fav_label = "💔 Retirer" if is_favorite(article) else "❤️ Favoris"
     if c1.button(fav_label, key=f"fav_{index}_{article['url']}"):
         monitoring.toggle_favorite(article)
         st.rerun() 
         
+    # Bouton Lire
     is_open = (st.session_state.opened_article_url == article['url'])
     btn_label = "📖 Fermer" if is_open else "📖 Lire l'article"
     
@@ -136,12 +159,14 @@ def afficher_article_interactif(article, is_hero=False, index=0):
             monitoring.log_article_view(article)
         st.rerun()
 
+    # Zone Lecture Dépliée
     if is_open:
         st.info(f"Source : {article['url']}")
         st.markdown(f"""
         <div style="background:var(--bg-app); border:1px solid var(--accent); padding:20px; margin-bottom:20px;">
             <h3 style="margin-top:0;">Contenu complet</h3>
             <p style="line-height:1.6; font-family:'Lora',serif;">{article.get('contenu_complet', 'Contenu non disponible')}</p>
+            <p style="line-height:1.6; font-family:'Lora',serif;">{article.get('contenu_complet') or 'Contenu non disponible'}</p>
             <a href="{article['url']}" target="_blank" style="display:block; margin-top:10px; color:var(--accent); font-weight:bold;">🔗 Lire sur le site d'origine</a>
         </div>
         """, unsafe_allow_html=True)
@@ -149,7 +174,7 @@ def afficher_article_interactif(article, is_hero=False, index=0):
 # --- 7. HEADER & NAVIGATION ---
 with st.container():
     st.markdown('<div class="nav-wrapper">', unsafe_allow_html=True)
-    c1, c2, c3, c4, c5, c6, c7 = st.columns([1, 1, 1, 0.8, 1, 1.5, 0.5])
+    c1, c2, c3, c4, c5, c6 = st.columns([1, 1, 1, 1, 1, 0.5])
     
     with c1: 
         if st.button("🔍 RECHERCHE", key="nav_search", use_container_width=True): 
@@ -160,35 +185,30 @@ with st.container():
     with c3: 
         if st.button("❤️ FAVORIS", key="nav_fav", use_container_width=True): 
             st.session_state.page = "Favoris"; st.rerun()
-    
     with c4:
-        if st.button("📊 STATS", key="nav_stats", use_container_width=True):
-            st.session_state.page = "Stats"; st.rerun()
-
-    with c5:
         with st.expander("HISTORIQUE"):
              if st.session_state.viewed_articles:
                  for art in st.session_state.viewed_articles:
-                     if st.button(f"📄 {art['titre'][:20]}...", key=f"hist_btn_{art['url']}"):
+                     if st.button(f"📄 {art['titre'][:25]}...", key=f"hist_btn_{art['url']}"):
                          st.session_state.opened_article_url = art['url']
                          st.markdown(f"[Ouvrir]({art['url']})")
              else: st.write("Vide")
-    with c6:
+    with c5:
         sc = st.columns([1, 2, 1]) 
         if sc[0].button("−", key="btn_minus", use_container_width=True):
             st.session_state.num_articles = max(1, st.session_state.num_articles-1); st.rerun()
         sc[1].markdown(f"<div class='counter-box'>{st.session_state.num_articles} ACTUS</div>", unsafe_allow_html=True)
         if sc[2].button("✚", key="btn_plus", use_container_width=True):
             st.session_state.num_articles = min(40, st.session_state.num_articles+1); st.rerun()
-    with c7:
+    with c6:
         icon = "🌙" if st.session_state.theme == 'light' else "☀️"
         if st.button(icon, key="btn_theme"): toggle_theme(); st.rerun()
     st.markdown('</div>', unsafe_allow_html=True)
 
-# --- 8. CORPS DE PAGE (BRANDING) ---
+# --- 8. CORPS DE PAGE ---
 st.markdown(f"""
     <div class="brand-title" translate="no" class="notranslate">Culturia</div>
-    <div style="text-align: center; font-family: 'Lora', serif; color: var(--text-light); font-style: italic; margin-top: -15px; margin-bottom: 30px;">Made by Noam & Maxime</div>
+    <div style="text-align: center; padding-top: 20px; font-family: 'Lora', serif; color: var(--text-light); font-style: italic; margin-top: -15px; margin-bottom: 30px;">Created by Noam Boutounas & Maxime Navellier</div>
     <div class="tagline-container"><div class="tagline-line"></div><div class="tagline">{datetime.now().strftime('%A %d %B %Y').capitalize()} — L'information augmentée</div></div>
 """, unsafe_allow_html=True)
 
@@ -225,33 +245,6 @@ elif st.session_state.page == "Favoris":
             cols = st.columns(2, gap="large") 
             for i, art in enumerate(favs[1:]):
                 with cols[i % 2]: afficher_article_interactif(art, is_hero=False, index=1000+i)
-
-elif st.session_state.page == "Stats":
-    # --- PAGE STATISTIQUES ---
-    st.markdown("<h2 style='text-align:center; font-family:serif; margin:30px 0;'>— TABLEAU DE BORD —</h2>", unsafe_allow_html=True)
-    
-    # On recharge les stats fraîches
-    monitoring.load_stats()
-    stats = monitoring.stats
-    
-    # 1. Métriques Clés (KPI)
-    kpi1, kpi2, kpi3 = st.columns(3)
-    kpi1.metric("🔍 Total Recherches", stats.get("total_searches", 0))
-    kpi2.metric("📖 Articles Lus", stats.get("total_articles_viewed", 0))
-    kpi3.metric("❤️ Favoris", len(st.session_state.favorites))
-    
-    st.markdown("---")
-    
-    # 2. Top Recherches (Bar Chart)
-    st.subheader("📈 Top des sujets recherchés")
-    search_terms = stats.get("most_searched_terms", {})
-    
-    if search_terms:
-        # On trie pour avoir les plus gros en premier
-        sorted_terms = dict(sorted(search_terms.items(), key=lambda item: item[1], reverse=True)[:10])
-        st.bar_chart(sorted_terms)
-    else:
-        st.info("Pas encore assez de données pour afficher le graphique.")
 
 elif st.session_state.page == "Parcourir":
     st.write("")
