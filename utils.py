@@ -57,8 +57,22 @@ def analyze_sentiment(text):
     """Analyse rudimentaire du sentiment (Positif/Négatif) par mots-clés."""
     if not text: return "😐 (Neutre)"
     
-    MOTS_POS = {"victoire", "succès", "hausse", "accord", "gagne", "super", "meilleur", "joie", "avancée"}
-    MOTS_NEG = {"défaite", "crise", "guerre", "mort", "chute", "échec", "problème", "grave", "danger"}
+    MOTS_POS = {"victoire", "succès", "hausse", "accord", "gagne", "super", "meilleur", 
+    "joie", "avancée", "progression", "essor", "profit", "bénéfice", 
+    "croissance", "triomphe", "exploit", "réussite", "innovation", 
+    "investissement", "partenariat", "alliance", "consensus", "reprise", 
+    "stabilité", "prospérité", "dynamisme", "opportunité", "espoir", 
+    "soulagement", "fierté", "enthousiasme", "excellent", "prometteur", 
+    "historique", "efficace", "exemplaire", "soutien", "approbation", 
+    "ratification", "aboutissement", "serein", "bénéfique"}
+    MOTS_NEG = {"défaite", "crise", "guerre", "mort", "chute", "échec", "problème", 
+    "grave", "danger", "récession", "déficit", "inflation", "effondrement", 
+    "faillite", "chômage", "pénurie", "baisse", "perte", "claque", 
+    "dégringolade", "austérité", "attentat", "agression", "violence", 
+    "scandale", "accusation", "condamnation", "menace", "tensions", 
+    "colère", "manifestation", "grève", "rupture", "procès", "inquiétant", 
+    "désastreux", "tragique", "critique", "alarmant", "peur", "honte", 
+    "douleur", "cruel", "incertain", "hostile"}
     
     text_clean = remove_accents(text.lower())
     words = re.findall(r'\w+', text_clean)
